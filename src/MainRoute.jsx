@@ -5,7 +5,7 @@ import SecondPage from './SecondPage.jsx';
 
 export default function MainRoute() {
   return (
-    <Router>
+    <Router basename="/"> {/* ← ADD THIS PART */}
       <Routes>
         <Route path="/" element={<AdminPage />} />
         <Route path="/home" element={<HomePage />} />

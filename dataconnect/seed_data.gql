@@ -1,0 +1,44 @@
+mutation CreateSeedData @transaction {
+  user_insertMany(data: [
+    {
+      id: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      email: "alice@example.com",
+      name: "Alice",
+      department: "Engineering"
+    },
+    {
+      id: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12",
+      email: "bob@example.com",
+      name: "Bob",
+      department: "Marketing"
+    }
+  ])
+  category_insertMany(data: [
+    {
+      id: "b0eebc99-9c0b-4ef8-bb6d-6bb9bd380b11",
+      name: "Appetizers",
+      displayOrder: 1
+    },
+    {
+      id: "b0eebc99-9c0b-4ef8-bb6d-6bb9bd380b12",
+      name: "Main Courses",
+      displayOrder: 2
+    }
+  ])
+  menuItem_insertMany(data: [
+    {
+      id: "c0eebc99-9c0b-4ef8-bb6d-6bb9bd380c11",
+      name: "Spring Rolls",
+      price: 5.99,
+      isAvailable: true,
+      categoryId: "b0eebc99-9c0b-4ef8-bb6d-6bb9bd380b11"
+    },
+    {
+      id: "c0eebc99-9c0b-4ef8-bb6d-6bb9bd380c12",
+      name: "Steak",
+      price: 25.50,
+      isAvailable: true,
+      categoryId: "b0eebc99-9c0b-4ef8-bb6d-6bb9bd380b12"
+    }
+  ])
+}

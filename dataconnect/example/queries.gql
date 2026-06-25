@@ -1,0 +1,32 @@
+mutation CreateOrder($status: String!, $totalAmount: Float!, $createdAt: Timestamp!) @auth(level: USER) {
+  order_insert(data: {
+    status: $status,
+    totalAmount: $totalAmount,
+    createdAt: $createdAt,
+    userId_expr: "auth.uid"
+  })
+}
+
+mutation UpdateOrder($id: UUID!, $status: String!) @auth(level: USER) {
+  order_update(key: {id: $id}, data: {status: $status})
+}
+
+query GetMyOrders @auth(level: USER) {
+  orders(where: {userId: {eq_expr: "auth.uid"}}) {
+    id
+    status
+    totalAmount
+    createdAt
+    pickupTime
+  }
+}
+
+query ListMenuItems @auth(level: PUBLIC) {
+  menuItems(where: {isAvailable: {eq: true}}) {
+    id
+    name
+    price
+    description
+    imageUrl
+  }
+}

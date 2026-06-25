@@ -309,7 +309,11 @@ const styles = {
   },
 
   hero: {
-    background: 'url(/public/images/Homepage.jpg) center/cover no-repeat',
+    // ✅ Fixed background path — works on GitHub Pages
+    backgroundImage: `url(${import.meta.env.BASE_URL}images/Homepage.jpg)`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    backgroundRepeat: 'no-repeat',
     height: '85vh',
     display: 'flex',
     alignItems: 'center',
@@ -452,5 +456,21 @@ const styles = {
     borderRadius: '6px',
     cursor: 'pointer',
     fontSize: '0.9rem',
+  },
+    '@media (max-width: 767px)': {
+    container: {
+      transform: 'scale(0.85)',
+      transformOrigin: 'top center',
+      width: '117%',
+      margin: '0 auto'
+    }
+  },
+  '@media (max-width: 480px)': {
+    container: {
+      transform: 'scale(0.72)',
+      transformOrigin: 'top center',
+      width: '139%',
+      margin: '0 auto'
+    }
   }
 };

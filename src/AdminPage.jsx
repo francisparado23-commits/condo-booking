@@ -23,11 +23,11 @@ export default function AdminPage() {
     }
   });
 
-  // --- DYNAMIC BACKGROUND IMAGES ---
+  // --- DYNAMIC BACKGROUND IMAGES (fixed path) ---
   const bgImages = [
-    "images/Bg1.jpg",
-    "images/Bg2.jpg",
-    "images/Bg3.jpg"
+    `${import.meta.env.BASE_URL}images/Bg1.jpg`,
+    `${import.meta.env.BASE_URL}images/Bg2.jpg`,
+    `${import.meta.env.BASE_URL}images/Bg3.jpg`
   ];
   const [bgIndex, setBgIndex] = useState(0);
 
@@ -36,44 +36,45 @@ export default function AdminPage() {
       setBgIndex(prev => (prev + 1) % bgImages.length);
     }, 4000); 
     return () => clearInterval(timer);
-  }, []);
+  }, [bgImages.length]);
 
   const [selectedCategory, setSelectedCategory] = useState('Hot Dish');
   const [foodData, setFoodData] = useState(() => {
     const saved = localStorage.getItem('foodData');
     return saved ? JSON.parse(saved) : {
       "Hot Dish": [
-        { name: "Sopas", price: "₱30", image: "/images/sopas.jpg", addOns: [] },
-        { name: "Lugaw", price: "₱30", image: "/images/lugaw.jpg", addOns: [] },
-        { name: "Sotanghon", price: "₱30", image: "/images/sotanghon.jpg", addOns: [] },
-        { name: "Champorado", price: "₱30", image: "/images/champorado.jpg", addOns: [] }
+        { name: "Sopas", price: "₱30", image: "images/sopas.jpg", addOns: [] },
+        { name: "Lugaw", price: "₱30", image: "images/lugaw.jpg", addOns: [] },
+        { name: "Sotanghon", price: "₱30", image: "images/sotanghon.jpg", addOns: [] },
+        { name: "Champorado", price: "₱30", image: "images/champorado.jpg", addOns: [] }
       ],
       "Pasta": [
-        { name: "Spaghetti", price: "₱50", image: "/images/spaghetti.jpg", addOns: [{name: "More Cheese", price: "₱10"}] },
-        { name: "Carbonara", price: "₱50", image: "/images/carbonara.jpg", addOns: [{name: "More Sauce", price: "₱10"}] }
+        { name: "Spaghetti", price: "₱50", image: "images/spaghetti.jpg", addOns: [{name: "More Cheese", price: "₱10"}] },
+        { name: "Carbonara", price: "₱50", image: "images/carbonara.jpg", addOns: [{name: "More Sauce", price: "₱10"}] }
       ],
       "Rice Meal": [
-        { name: "Menudo with Rice", price: "₱90", image: "/images/menudo.jpg", addOns: [{name: "Extra Rice", price: "₱15"}] },
-        { name: "Bicol Express with Rice", price: "₱85", image: "/images/bicol-express.jpg", addOns: [{name: "Extra Rice", price: "₱15"}] },
-        { name: "Sinigang with Rice", price: "₱70", image: "/images/sinigang.jpg", addOns: [{name: "Extra Rice", price: "₱15"}] }
+        { name: "Menudo with Rice", price: "₱90", image: "images/menudo.jpg", addOns: [{name: "Extra Rice", price: "₱15"}] },
+        { name: "Bicol Express with Rice", price: "₱85", image: "images/bicol-express.jpg", addOns: [{name: "Extra Rice", price: "₱15"}] },
+        { name: "Sinigang with Rice", price: "₱70", image: "images/sinigang.jpg", addOns: [{name: "Extra Rice", price: "₱15"}] }
       ],
       "Drinks": [
-        { name: "Hot coffee", price: "₱20", image: "/images/hot-coffee.jpg", addOns: [] },
-        { name: "Ice Coffee", price: "₱30", image: "/images/ice-coffee.jpg", addOns: [] },
-        { name: "Bottled Water", price: "₱10", image: "/images/water.jpg", addOns: [] },
-        { name: "Coke", price: "₱25", image: "/images/coke.jpg", addOns: [] },
-        { name: "Mountain Dew", price: "₱25", image: "/images/mountain-dew.jpg", addOns: [] },  
-        { name: "C2 Apple", price: "₱30", image: "/images/c2-apple.jpg", addOns: [] }
+        { name: "Hot coffee", price: "₱20", image: "images/hot-coffee.jpg", addOns: [] },
+        { name: "Ice Coffee", price: "₱30", image: "images/ice-coffee.jpg", addOns: [] },
+        { name: "Bottled Water", price: "₱10", image: "images/water.jpg", addOns: [] },
+        { name: "Coke", price: "₱25", image: "images/coke.jpg", addOns: [] },
+        { name: "Mountain Dew", price: "₱25", image: "images/mountain-dew.jpg", addOns: [] },  
+        { name: "C2 Apple", price: "₱30", image: "images/c2-apple.jpg", addOns: [] }
       ],
       "Dessert": [
-        { name: "Ice Cream", price: "₱40", image: "/images/ice-cream.jpg", addOns: [] }
+        { name: "Ice Cream", price: "₱40", image: "images/ice-cream.jpg", addOns: [] }
       ],
       "Other": [
-        { name: "Nova", price: "₱12", image: "/images/nova.jpg", addOns: [] },
-        { name: "Piatos", price: "₱12", image: "/images/piatos.jpg", addOns: [] },
-        { name: "Sponge", price: "₱12", image: "/images/sponge.jpg", addOns: [] },
-        { name: "Cloud 9", price: "₱13", image: "/images/cloud9.jpg", addOns: [] }
+        { name: "Nova", price: "₱12", image: "images/nova.jpg", addOns: [] },
+        { name: "Piatos", price: "₱12", image: "images/piatos.jpg", addOns: [] },
+        { name: "Sponge", price: "₱12", image: "images/sponge.jpg", addOns: [] },
+        { name: "Cloud 9", price: "₱13", image: "images/cloud9.jpg", addOns: [] }
       ]
+
     };
   });
   const [foodStatus, setFoodStatus] = useState(() => {
@@ -121,7 +122,7 @@ export default function AdminPage() {
     const newItem = {
       name: newItemName.trim().toUpperCase(),
       price: formattedPrice,
-      image: "/images/default.jpg",
+      image: "images/default.jpg",
       addOns: []
     };
 
@@ -376,7 +377,11 @@ export default function AdminPage() {
             {foodData[selectedCategory]?.map((item, idx) => (
               <div key={idx} style={styles.foodCard}>
                 <div style={{ position: 'relative' }}>
-                  <img src={item.image} alt={item.name} style={styles.foodImage} />
+                  <img 
+                    src={`${import.meta.env.BASE_URL}${item.image}`} 
+                    alt={item.name} 
+                    style={styles.foodImage}
+                  />
                   
                   {getStatus(item.name) === 'not_available' && (
                     <div style={styles.stampOverlay}>
@@ -699,7 +704,7 @@ const styles = {
   width:'fit-content',
   border:'1px solid rgba(255, 255, 255, 0.3)', 
   boxShadow:'0 0 8px rgba(255, 255, 255, 0.25)',
-  WebkitTextStroke: '0.1px #ffffff', // 1.2px black outline
+  WebkitTextStroke: '0.1px #ffffff',
   textShadow: '1px 1px 0 #f3efef, -1px -1px 0 #fbf9f9, 1px -1px 0 #ffffff, -1px 1px 0 #efefef' 
 },
 
@@ -746,7 +751,7 @@ const styles = {
     marginBottom:'2rem',
     letterSpacing: '0.5px',
     fontFamily: 'Segoe UI, Impact, Poppins, sans-serif', 
-    WebkitTextStroke: '0.5px #1d1b1b', // 1.2px black outline
+    WebkitTextStroke: '0.5px #1d1b1b',
     textShadow: '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000' 
   },
 
@@ -760,13 +765,15 @@ const styles = {
     background:'#1a1a1a', 
     borderRadius:'12px', 
     overflow:'hidden', 
-    border:'1px solid #d32f2f40'
+    border:'1px solid #d32f2f40',
+  
   },
 
   foodImage: {
     width:'100%', 
     height:'180px', 
-    objectFit:'cover'
+    objectFit:'cover',
+    display:'block'
   },
 
   stampOverlay: {

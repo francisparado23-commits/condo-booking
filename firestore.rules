@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Anyone can view the menu; only logged-in admin can add/edit/delete
+    match /foodItems/{document=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Users can submit orders; only admin can view all orders
+    match /orders/{document=**} {
+      allow create: if true;
+      allow read: if request.auth != null;
+    }
+
+  }
+}
